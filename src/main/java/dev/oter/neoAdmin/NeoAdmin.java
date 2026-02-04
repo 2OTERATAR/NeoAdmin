@@ -1,26 +1,32 @@
 package me.neo.admin;
 
-import org.bukkit.plugin.java.JavaPlugin;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-public class NeoAdmin extends JavaPlugin {
-    private static NeoAdmin instance;
-    private AdminManager adminManager;
+public class AdminCommand implements CommandExecutor {
+    private final NeoAdmin plugin;
 
-    @Override
-    public void onEnable() {
-        instance = this;
-        saveDefaultConfig();
-        this.adminManager = new AdminManager();
-
-        getCommand("admin").setExecutor(new AdminCommand(this));
-        getCommand("a").setExecutor(new StaffChat(this));
-
-        getServer().getPluginManager().registerEvents(new AdminGui(this), this);
-        getLogger().info("NeoAdmin: Система запущена на базе Paper 1.21.1");
+    public AdminCommand(NeoAdmin plugin) {
+        this.plugin = plugin;
     }
 
-    public static NeoAdmin getInstance() { return instance; }
-    public AdminManager getAdminManager() { return adminManager; }
-    public MiniMessage mm() { return MiniMessage.miniMessage(); }
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!(sender instanceof Player player)) return true;
+
+        if (args.length == 0) {
+            new AdminGui(plugin).openMenu(player);
+            return true;
+        }
+
+        if (args[0].equalsIgnoreCase("on") || args[0].equalsIgnoreCase("off")) {
+            if (!player.hasPermission("neoadmin.mode")) return true;
+            plugin.getAdminManager().toggleAdminMode(player);
+        }
+
+        return true;
+    }
 }
