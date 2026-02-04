@@ -1,32 +1,21 @@
-package me.neo.admin;
+package dev.oter.neoAdmin;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class AdminCommand implements CommandExecutor {
-    private final NeoAdmin plugin;
+public class NeoAdmin extends JavaPlugin {
 
-    public AdminCommand(NeoAdmin plugin) {
-        this.plugin = plugin;
+    @Override
+    public void onEnable() {
+        // Регистрация команд
+        AdminCommand adminCmd = new AdminCommand();
+        getCommand("admin").setExecutor(adminCmd);
+        getCommand("a").setExecutor(adminCmd);
+
+        getLogger().info("NeoAdmin by oter42 успешно запущен на Arch Linux!");
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player player)) return true;
-
-        if (args.length == 0) {
-            new AdminGui(plugin).openMenu(player);
-            return true;
-        }
-
-        if (args[0].equalsIgnoreCase("on") || args[0].equalsIgnoreCase("off")) {
-            if (!player.hasPermission("neoadmin.mode")) return true;
-            plugin.getAdminManager().toggleAdminMode(player);
-        }
-
-        return true;
+    public void onDisable() {
+        getLogger().info("NeoAdmin выключен.");
     }
 }

@@ -5,6 +5,7 @@ api-version: '1.21'
 authors: [ oter42 ]
 description: Генний
 website: https://t.me/oter993
+
 commands:
   admin:
     description: Основная команда администрирования
@@ -12,6 +13,7 @@ commands:
   a:
     description: Чат для персонала
     permission: neoadmin.staffchat
+
 permissions:
   neoadmin.use:
     description: Доступ к меню и режимам
