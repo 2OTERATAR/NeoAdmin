@@ -1,0 +1,7 @@
+name: NeoAdmin
+version: '1.0-SNAPSHOT'
+main: dev.oter.neoAdmin.NeoAdmin
+api-version: '1.21'
+authors: [ oter42 ]
+description: Генний
+website: https://t.me/oter993

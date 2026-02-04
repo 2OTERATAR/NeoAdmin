@@ -1,0 +1,19 @@
+# NeoAdmin Config - 20 years of perfection
+settings:
+  prefix: "<gold><b>Neo</b></gold><yellow>Admin</yellow> <dark_gray>»</dark_gray> "
+  staff-format: "<gold>STAFF</gold> <gray>| <white>%rank% <yellow>%player%</yellow> <dark_gray>»</dark_gray> <gold>%message%</gold>"
+
+gui:
+  title: "<gold>Панель управления</gold>"
+  items:
+    player-head: "<yellow>Игрок: <white>%player%"
+    teleport-lore: "<gray>ПКМ: <gold>Слежка (Spectator)"
+    manage-lore: "<gray>ЛКМ: <gold>Наказать"
+
+ranks:
+  helper:
+    display: "<aqua>Хелпер</aqua>"
+    perms: ["neoadmin.staffchat", "neoadmin.menu.view"]
+  moder:
+    display: "<blue>Модератор</blue>"
+    perms: ["neoadmin.staffchat", "neoadmin.menu.view", "neoadmin.mode"]
